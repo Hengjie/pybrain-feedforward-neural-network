@@ -3,13 +3,12 @@
 #Modified April 25 2012, now revision 1
 #Modified by Hengjie Wang to make it command line only
 
-#result file
-result = 'result.dat'
-
+import shutil
 #Import plotter
 from matplotlib import pylab
 import sys
 import os.path
+import os
 import string
 
 from pybrain.datasets import ClassificationDataSet
@@ -22,6 +21,18 @@ from multiprocessing import Process, JoinableQueue, Manager
 import Queue
 from random import random
 from pprint import pprint 
+
+
+#result file
+filename = sys.argv[1]
+result_dir = sys.argv[2]
+try:
+  shutil.rmtree(result_dir)
+except:
+  pass
+os.mkdir(result_dir)
+
+result = "results.dat"
 
 class BrainApp():
 
@@ -45,7 +56,7 @@ class BrainApp():
       self.filename = filename
 
       self.parameters.update(params)
-      self.file = open('results/%s' % (random(),), 'w')
+      self.file = open('%s/%s' % (result_dir,random()), 'w')
 
     def run(self):
       results = []
@@ -56,7 +67,7 @@ class BrainApp():
       self.file.write("%s\n" % (results),)
 
       correct_percentage = 0
-      self.file.write("x\tcorrect\tbad\tunknown\n")
+      self.file.write("epoch\tlearningrate\tcorrect\tbad\tunknown\n")
       for row in results:
         correct_percentage += row['correct_percentage']
         self.file.write("{}\t{}\t{}\t{}\t{}\n".format(row['epoch'], row['leanringrate'], round(row['correct_percentage'], 2), round(row['bad_percentage'], 2), round(row['unknown_percentage'], 2)))
@@ -320,38 +331,45 @@ def build_jobs(list_of_values):
 
 
 ###main Program
-filename = sys.argv[1]
-overall_results = Manager().list()
 
-for epoch in range(25, 100, 20):
-  print "====================="
-  print "epoch: {}".format(epoch)
 
-  workers = []
 
-  learning_rates = [0.05, 0.1, 0.15]
-  hidden_layer_1_sizes = [0, 2, 9, 18, 30, 50, 100]
-  hidden_layer_0_sizes = [2, 9, 18, 30, 50, 100]
+learning_rates = [0.05, 0.1, 0.15]
+hidden_layer_1_sizes = [0, 2, 9, 18, 30, 100]
+hidden_layer_0_sizes = [2, 9, 18, 100]
+bias_values = [True, False]
+hidden_st = ['T', 'S']
+output_sl = ['S', 'L']
+momentum_values = [0.0, 0.2]
+weight_decay_values = [0.0, 0.3]
 
-  # learning_rates = [0.05]
-  # hidden_layer_1_sizes = [0]
-  # hidden_layer_0_sizes = [2, 9]
 
-  learning_dicts = build_dict_list(learning_rates, 'LEARNING_RATE')
-  hidden_layer_0_dicts = build_dict_list(hidden_layer_0_sizes, 'HIDDEN0')
-  hidden_layer_1_dicts = build_dict_list(hidden_layer_1_sizes, 'HIDDEN1')
-  q = JoinableQueue()
+# learning_rates = [0.05]
+# hidden_layer_1_sizes = [0]
+# hidden_layer_0_sizes = [2, 9]
 
-  jobs = build_jobs([learning_dicts, hidden_layer_0_dicts, hidden_layer_1_dicts])
+learning_dicts = build_dict_list(learning_rates, 'LEARNING_RATE')
+hidden_layer_0_dicts = build_dict_list(hidden_layer_0_sizes, 'HIDDEN0')
+hidden_layer_1_dicts = build_dict_list(hidden_layer_1_sizes, 'HIDDEN1')
+bias_dicts = build_dict_list(bias_values, 'BIAS')
+hidden_st_dicts = build_dict_list(hidden_st,  'HIDDEN_S/T')
+output_sl_dicts = build_dict_list(output_sl,  'OUTPUT_S/L')
+momentum_dicts = build_dict_list(momentum_values, 'MOMENTUM')
+weight_decay_dicts = build_dict_list(weight_decay_values, 'WEIGHT_DECAY')
 
-  for job in jobs:
-    q.put({'job': job, 'filename': filename})
+q = JoinableQueue()
 
-  for x in range(10):
-    process = WorkerProcess(q)
-    process.start()
-  print "Processes started"
-  q.join()
+jobs = build_jobs([learning_dicts, hidden_layer_0_dicts, hidden_layer_1_dicts, bias_dicts, hidden_st_dicts, output_sl_dicts, momentum_dicts, weight_decay_dicts])
+
+for job in jobs:
+  q.put({'job': job, 'filename': filename})
+print "Job count: %s" % (len(jobs))
+for x in range(int(sys.argv[3])):
+  process = WorkerProcess(q)
+  process.daemon = True
+  process.start()
+print "Processes started"
+q.join()
 
 
 # # analyse the data
