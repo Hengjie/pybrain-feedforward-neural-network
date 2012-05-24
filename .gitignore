@@ -1,6 +1,5 @@
 *.py[co]
 
-result*
 # Packages
 *.egg
 *.egg-info
