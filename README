@@ -1,0 +1,23 @@
+The collection in this folder is described below:
+
+iris.dat     this is the original data from UCI
+irisN.dat    the above file was normalised so that the input attributes are all normalised by dividing throughout by the max attribute found
+
+MushroomN.dat   same normalisation as above, division by greatest attribute. The character based data set was modified into a numeric one by giving each attribute a numeric value, rather than a letter value, so a, b, c would become 0, 1, 2 and so on.
+
+Faults.dat   The original UCI data
+FaultsN.dat  Normalisation by overall greatest attribute value
+FaultsC.dat  Normalisation by greatest attribute with column
+FaultsZMC.dat Normalisation by column and a zero mean for all input attributes
+
+Blood1.dat    the original data, but with the output modified to give two output categories (representing a true one and a false one)
+BloodN.dat    the above data but normalised for greates overall attribute
+BloodC.dat   Normalised on a per attribute (Column) basis
+BloodZMC.dat Normalised by column and has a zero mean
+
+The following small programs are included so that anyone who is interested in python can check my work
+The appropriate filenames and Input and Output sizes must be set within the programgedit for the data samples of interest
+NormaliseN.py	just an overall input normalisatio
+NormaliseC.py	normalisation on a per attribute basis
+NormaliseZMC.py	normalisation per attribute and with zero mean
+
