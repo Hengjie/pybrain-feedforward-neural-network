@@ -27,10 +27,11 @@ from pprint import pprint
 filename = sys.argv[1]
 result_dir = sys.argv[2]
 try:
-  shutil.rmtree(result_dir)
+  if sys.argv[4] == "DEL":
+    shutil.rmtree(result_dir)
+  os.mkdir(result_dir)
 except:
   pass
-os.mkdir(result_dir)
 
 result = "results.dat"
 
