@@ -64,9 +64,8 @@ class BrainApp():
       results.append(self.RunSimulator())
       results.append(self.RunSimulator())
       results.append(self.RunSimulator())
-      pprint(self.parameters, self.file)
-      self.file.write("\n")
-      pprint(results, self.file)
+      self.file.write("%s\n" % (self.parameters,))
+      self.file.write("%s\n" % (results),)
 
       correct_percentage = 0
       self.file.write("epoch\tlearningrate\tcorrect\tbad\tunknown\n")
@@ -336,9 +335,9 @@ def build_jobs(list_of_values):
 
 
 
-learning_rates = [0.1, 0.15]
-hidden_layer_1_sizes = [18]
-hidden_layer_0_sizes = [17]
+learning_rates = [0.05, 0.1, 0.15]
+hidden_layer_1_sizes = [0, 2, 9, 18, 30, 100]
+hidden_layer_0_sizes = [2, 9, 18, 100]
 bias_values = [True, False]
 hidden_st = ['T', 'S']
 output_sl = ['S', 'L']
@@ -361,7 +360,7 @@ weight_decay_dicts = build_dict_list(weight_decay_values, 'WEIGHT_DECAY')
 
 q = JoinableQueue()
 
-jobs = build_jobs([learning_dicts, hidden_layer_0_dicts, hidden_layer_1_dicts])
+jobs = build_jobs([learning_dicts, hidden_layer_0_dicts, hidden_layer_1_dicts, bias_dicts, hidden_st_dicts, output_sl_dicts, momentum_dicts, weight_decay_dicts])
 
 for job in jobs:
   q.put({'job': job, 'filename': filename})
