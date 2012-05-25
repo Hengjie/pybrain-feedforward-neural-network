@@ -64,8 +64,9 @@ class BrainApp():
       results.append(self.RunSimulator())
       results.append(self.RunSimulator())
       results.append(self.RunSimulator())
-      self.file.write("%s\n" % (self.parameters,))
-      self.file.write("%s\n" % (results),)
+      pprint(self.parameters, self.file)
+      self.file.write("\n")
+      pprint(results, self.file)
 
       correct_percentage = 0
       self.file.write("epoch\tlearningrate\tcorrect\tbad\tunknown\n")
