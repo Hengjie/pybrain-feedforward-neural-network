@@ -5,7 +5,7 @@
 
 import shutil
 #Import plotter
-from matplotlib import pylab
+#from matplotlib import pylab
 import sys
 import os.path
 import os
@@ -70,7 +70,7 @@ class BrainApp():
       self.file.write("epoch\tlearningrate\tcorrect\tbad\tunknown\n")
       for row in results:
         correct_percentage += row['correct_percentage']
-        self.file.write("{}\t{}\t{}\t{}\t{}\n".format(row['epoch'], row['leanringrate'], round(row['correct_percentage'], 2), round(row['bad_percentage'], 2), round(row['unknown_percentage'], 2)))
+        self.file.write("{0}\t{1}\t{2}\t{3}\t{4}\n".format(row['epoch'], row['leanringrate'], round(row['correct_percentage'], 2), round(row['bad_percentage'], 2), round(row['unknown_percentage'], 2)))
 
       self.file.write("Avg correct %s\n" % (correct_percentage / 3))
       self.file.close()
