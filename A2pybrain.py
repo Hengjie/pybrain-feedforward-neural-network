@@ -262,14 +262,14 @@ overall_results = Manager().list()
 
 for epoch in range(25, 66, 20):
   print "====================="
-  print "epoch: {}".format(epoch)  
+  print "epoch: {0}".format(epoch)  
 
   # different learning rates
   for learningrate in frange(0.00, 1, 0.05):
 
     workers = []
 
-    print "learning: {}".format(learningrate)
+    print "learning: {0}".format(learningrate)
     # run it three times
     for x in range(16):
       brain_thread = BrainApp(overall_results, filename, epoch, learningrate)
@@ -283,4 +283,4 @@ for epoch in range(25, 66, 20):
 # analyse the data
 print "x\tcorrect\tbad\tunknown\n\r"
 for row in overall_results:
-  print "{}\t{}\t{}\t{}\t{}".format(row['epoch'], row['leanringrate'], round(row['correct_percentage'], 2), round(row['bad_percentage'], 2), round(row['unknown_percentage'], 2))
+  print "{0}\t{1}\t{2}\t{}\t{3}".format(row['epoch'], row['leanringrate'], round(row['correct_percentage'], 2), round(row['bad_percentage'], 2), round(row['unknown_percentage'], 2))
