@@ -7,7 +7,7 @@
 result = 'result.dat'
 
 #Import plotter
-from matplotlib import pylab
+#from matplotlib import pylab
 import sys
 import os.path
 import string
