@@ -31,11 +31,9 @@ try:
     shutil.rmtree(result_dir)
 except:
   pass
-try:
-  print result_dir
-  os.mkdir(result_dir)
-except:
-  pass
+
+print result_dir
+
 result = "results.dat"
 
 class BrainApp():
@@ -63,7 +61,7 @@ class BrainApp():
       rand_value = random()
 
       # terrible code but it works
-      _dir = '%s/train/' % (result_dir,)
+      _dir = '%s/' % (result_dir,)
       if not os.path.exists(_dir):
           os.makedirs(_dir)
 
