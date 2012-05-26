@@ -1,7 +1,7 @@
  #First draft G Coghill on April 6 2011
 #The PyBrain BackProp Simulator with GUI
 #Modified April 25 2012, now revision 1
-#Modified by Hengjie Wang to make it command line only
+#Modified by Hengjie to make it command line only
 
 import shutil
 #Import plotter
