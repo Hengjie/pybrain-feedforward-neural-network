@@ -29,10 +29,13 @@ result_dir = sys.argv[2]
 try:
   if sys.argv[4] == "DEL":
     shutil.rmtree(result_dir)
+except:
+  pass
+try:
+  print result_dir
   os.mkdir(result_dir)
 except:
   pass
-
 result = "results.dat"
 
 class BrainApp():
