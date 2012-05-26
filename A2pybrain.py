@@ -39,11 +39,13 @@ class BrainApp(Process):
                   'UPPER_LIMIT': '0.6',  #Higher than this, taken as 1.0
                   'LOWER_LIMIT': '0.4' } #Less than this, taken as zero
 
-    def __init__(self, output, filename, epoch=120, learningrate=0.15):
+    def __init__(self, output, filename, epoch=120, learningrate=0.15, hidden=9):
       self.filename = filename
 
       self.parameters['EPOCHS'] = epoch
       self.parameters['LEARNING_RATE'] = learningrate
+      self.parameters['HIDDEN0'] = hidden
+      self.parameters['HIDDEN1'] = hidden
       self.output = output
       super(BrainApp, self).__init__()
 
@@ -168,9 +170,9 @@ class BrainApp(Process):
             trnresult = self.SumSquareError(self.network.activateOnDataset(dataset=trainData), trainData['target'])
             tstresult = self.SumSquareError(self.network.activateOnDataset(dataset=testData), testData['target'])
             #Print Current Errors (comment out when not needed)
-            print "epoch: %4d" % trainer.totalepochs, \
-            " train error: %5.2f" % trnresult, \
-            " test error: %5.2f" % tstresult
+            #print "epoch: %4d" % trainer.totalepochs, \
+            #" train error: %5.2f" % trnresult, \
+            #" test error: %5.2f" % tstresult
             #Build Lists for plotting 
             TrainingPoints.append(trnresult)
             TestPoints.append(tstresult)
@@ -247,6 +249,7 @@ class BrainApp(Process):
 
         total_ret['epoch'] = self.parameters['EPOCHS']
         total_ret['leanringrate'] = self.parameters['LEARNING_RATE']
+        total_ret['hidden'] = self.parameters['HIDDEN0']
 
         return total_ret
 
@@ -260,19 +263,20 @@ def frange(x, y, jump):
 filename = sys.argv[1]
 overall_results = Manager().list()
 
-for epoch in range(25, 66, 20):
+for epoch in range(25, 125, 20):
   print "====================="
   print "epoch: {0}".format(epoch)  
 
   # different learning rates
-  for learningrate in frange(0.00, 1, 0.05):
+  for learningrate in frange(0.00, 1, 0.1):
 
     workers = []
 
     print "learning: {0}".format(learningrate)
     # run it three times
-    for x in range(16):
-      brain_thread = BrainApp(overall_results, filename, epoch, learningrate)
+    for x in range(6):
+      brain_thread = BrainApp(overall_results, filename, epoch, learningrate, 9)
+      brain_thread = BrainApp(overall_results, filename, epoch, learningrate, 18)
       workers.append(brain_thread)
 
       brain_thread.start()
@@ -281,6 +285,6 @@ for epoch in range(25, 66, 20):
         brain_thread.join()
 
 # analyse the data
-print "x\tcorrect\tbad\tunknown\n\r"
+print "epoch\tlearnRate\rhidden\tcorrect\tbad\tunknown\n"
 for row in overall_results:
-  print "{0}\t{1}\t{2}\t{}\t{3}".format(row['epoch'], row['leanringrate'], round(row['correct_percentage'], 2), round(row['bad_percentage'], 2), round(row['unknown_percentage'], 2))
+  print "{0}\t{1}\t{2}\t{3}\t{4}\t{5}".format(row['epoch'], row['leanringrate'], row['hidden'], round(row['correct_percentage'], 2), round(row['bad_percentage'], 2), round(row['unknown_percentage'], 2))
