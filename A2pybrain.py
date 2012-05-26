@@ -1,13 +1,13 @@
 #First draft G Coghill on April 6 2011
 #The PyBrain BackProp Simulator with GUI
 #Modified April 25 2012, now revision 1
-#Modified by Hengjie Wang to make it command line only
+#Modified by Hengjie to make it command line only
 
 #result file
 result = 'result.dat'
 
 #Import plotter
-from matplotlib import pylab
+#from matplotlib import pylab
 import sys
 import os.path
 import string
@@ -26,20 +26,20 @@ class BrainApp(Process):
     #Parameters (attributes) and values
     parameters = {'INPUT': '4',     #No of input dimensions
                   'OUTPUT': '2',    #No of Output Class
-                  'HIDDEN0': '3',   #No of Hidden Neurons 1st layer
-                  'HIDDEN1': '2',   #Second Layer
+                  'HIDDEN0': '9',   #No of Hidden Neurons 1st layer
+                  'HIDDEN1': '9',   #Second Layer
                   'HIDDEN_S/T': 'T', #Hidden layer activations (S)oftMax or (T)anh
                   'OUTPUT_S/L': 'S', #Output layer activation (S)oftMax or (L)inear
-                  'LEARNING_RATE': '0.05',
+                  'LEARNING_RATE': '0.15',
                   'MOMENTUM': '0.0',
                   'BIAS': 'True',
-                  'EPOCHS': '120',  #No of training cycles used
+                  'EPOCHS': '25',  #No of training cycles used
                   'WEIGHT_DECAY': '0.0',
                   'SPLIT_DATA': '0.1',
                   'UPPER_LIMIT': '0.6',  #Higher than this, taken as 1.0
                   'LOWER_LIMIT': '0.4' } #Less than this, taken as zero
 
-    def __init__(self, output, filename, epoch=120, learningrate=0.05):
+    def __init__(self, output, filename, epoch=120, learningrate=0.15):
       self.filename = filename
 
       self.parameters['EPOCHS'] = epoch
@@ -260,26 +260,27 @@ def frange(x, y, jump):
 filename = sys.argv[1]
 overall_results = Manager().list()
 
-for epoch in range(25, 100, 20):
+for epoch in range(25, 66, 20):
   print "====================="
-  print "epoch: {}".format(epoch)
-
-  workers = []
+  print "epoch: {0}".format(epoch)  
 
   # different learning rates
-  for learningrate in frange(0.05, 1, 0.20):
-    print "learning: {}".format(learningrate)
+  for learningrate in frange(0.00, 1, 0.05):
+
+    workers = []
+
+    print "learning: {0}".format(learningrate)
     # run it three times
-    for x in range(3):
+    for x in range(16):
       brain_thread = BrainApp(overall_results, filename, epoch, learningrate)
       workers.append(brain_thread)
 
       brain_thread.start()
 
-  for brain_thread in workers:
-      brain_thread.join()
+    for brain_thread in workers:
+        brain_thread.join()
 
 # analyse the data
 print "x\tcorrect\tbad\tunknown\n\r"
 for row in overall_results:
-  print "{}\t{}\t{}\t{}\t{}".format(row['epoch'], row['leanringrate'], round(row['correct_percentage'], 2), round(row['bad_percentage'], 2), round(row['unknown_percentage'], 2))
+  print "{0}\t{1}\t{2}\t{}\t{3}".format(row['epoch'], row['leanringrate'], round(row['correct_percentage'], 2), round(row['bad_percentage'], 2), round(row['unknown_percentage'], 2))

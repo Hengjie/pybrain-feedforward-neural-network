@@ -1,0 +1,35 @@
+{'BIAS': True,
+ 'EPOCHS': '25',
+ 'HIDDEN0': 17,
+ 'HIDDEN1': 29,
+ 'HIDDEN_S/T': 'T',
+ 'INPUT': '4',
+ 'LEARNING_RATE': 0.14999999999999999,
+ 'LOWER_LIMIT': '0.4',
+ 'MOMENTUM': '0.0',
+ 'OUTPUT': '2',
+ 'OUTPUT_S/L': 'S',
+ 'SPLIT_DATA': '0.1',
+ 'UPPER_LIMIT': '0.6',
+ 'WEIGHT_DECAY': '0.0'}
+
+[{'bad_percentage': 33.783783783783782,
+  'correct_percentage': 50.0,
+  'epoch': '25',
+  'leanringrate': 0.14999999999999999,
+  'unknown_percentage': 16.216216216216218},
+ {'bad_percentage': 22.972972972972972,
+  'correct_percentage': 75.675675675675677,
+  'epoch': '25',
+  'leanringrate': 0.14999999999999999,
+  'unknown_percentage': 1.3513513513513513},
+ {'bad_percentage': 17.567567567567568,
+  'correct_percentage': 75.675675675675677,
+  'epoch': '25',
+  'leanringrate': 0.14999999999999999,
+  'unknown_percentage': 6.756756756756757}]
+epoch	learningrate	correct	bad	unknown
+25	0.15	50.0	33.78	16.22
+25	0.15	75.68	22.97	1.35
+25	0.15	75.68	17.57	6.76
+Avg correct 67.1171171171
