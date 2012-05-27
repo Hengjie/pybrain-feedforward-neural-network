@@ -31,11 +31,9 @@ try:
     shutil.rmtree(result_dir)
 except:
   pass
-try:
-  print result_dir
-  os.mkdir(result_dir)
-except:
-  pass
+
+print result_dir
+
 result = "results.dat"
 
 class BrainApp():
@@ -60,7 +58,22 @@ class BrainApp():
       self.filename = filename
 
       self.parameters.update(params)
-      self.file = open('%s/%s' % (result_dir,random()), 'w')
+      rand_value = random()
+
+      # terrible code but it works
+      _dir = '%s/' % (result_dir,)
+      if not os.path.exists(_dir):
+          os.makedirs(_dir)
+
+      train_dir = '%s/train/' % (result_dir,)
+      if not os.path.exists(train_dir):
+        os.makedirs(train_dir)
+
+      results_file = '%s/%s.txt' % (result_dir, rand_value)
+      results_train_file = '%s/train/%s.txt' % (result_dir, rand_value)
+
+      self.file = open(results_file, 'w')
+      self.file_train = open(results_train_file, 'w')
 
     def run(self):
       results = []
@@ -200,18 +213,24 @@ class BrainApp():
         TestPoints = []
         xAxis = []
         #Run for specified number of Epochs
+        self.file_train.write("\n\nepoch\ttrain err\ttest err")
         for i in range(int(self.parameters['EPOCHS'])):
             trainer.trainEpochs(1)
             trnresult = self.SumSquareError(self.network.activateOnDataset(dataset=trainData), trainData['target'])
             tstresult = self.SumSquareError(self.network.activateOnDataset(dataset=testData), testData['target'])
             #Print Current Errors (comment out when not needed)
-            print "epoch: %4d" % trainer.totalepochs, \
-            " train error: %5.2f" % trnresult, \
-            " test error: %5.2f" % tstresult
+            #print "epoch: %4d" % trainer.totalepochs, \
+            #" train error: %5.2f" % trnresult, \
+            #" test error: %5.2f" % tstresult
             #Build Lists for plotting 
             TrainingPoints.append(trnresult)
             TestPoints.append(tstresult)
             xAxis.append(i)
+
+            self.file_train.write("{0}\t{1}\t{2}".format(i, trnresult, tstresult))
+
+        self.file_train.write("\n\n")
+        pprint({'train': TrainingPoints, 'test': TestPoints}, self.file_train)
 
         #Output Results
         return self.AnalyzeOutput(testData)
@@ -346,13 +365,14 @@ def build_jobs(list_of_values):
 
 
 
-learning_rates = [0.10, 0.12, 0.14, 0.15, 0.16, 0.17]
-hidden_layer_1_sizes = [0, 9, 18, 19, 33]
-hidden_layer_0_sizes = [8, 9, 18, 19, 33]
-bias_values = [True, False]
-hidden_st = ['S', 'T']
-output_sl = ['S', 'L']
-momentum_values = [0.0, 0.2]
+epochs = range(25, 125, 20)
+learning_rates = [0.1, 0.15]
+hidden_layer_1_sizes = [0]
+hidden_layer_0_sizes = [2, 4, 9, 17, 33, 65, 129]
+bias_values = [True]
+hidden_st = ['T']
+output_sl = ['S']
+momentum_values = [0.0]
 weight_decay_values = [0.0]
 
 
@@ -368,10 +388,11 @@ hidden_st_dicts = build_dict_list(hidden_st,  'HIDDEN_S/T')
 output_sl_dicts = build_dict_list(output_sl,  'OUTPUT_S/L')
 momentum_dicts = build_dict_list(momentum_values, 'MOMENTUM')
 weight_decay_dicts = build_dict_list(weight_decay_values, 'WEIGHT_DECAY')
+epochs_dicts = build_dict_list(epochs, 'EPOCHS')
 
 q = JoinableQueue()
 
-jobs = build_jobs([learning_dicts, hidden_layer_0_dicts, hidden_layer_1_dicts, bias_dicts, hidden_st_dicts, output_sl_dicts, momentum_dicts, weight_decay_dicts])
+jobs = build_jobs([learning_dicts, hidden_layer_0_dicts, hidden_layer_1_dicts, bias_dicts, hidden_st_dicts, output_sl_dicts, momentum_dicts, weight_decay_dicts, epochs_dicts])
 
 for job in jobs:
   q.put({'job': job, 'filename': filename})
