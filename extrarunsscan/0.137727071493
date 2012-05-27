@@ -1,0 +1,71 @@
+{'BIAS': False,
+ 'EPOCHS': '45',
+ 'HIDDEN0': 9,
+ 'HIDDEN1': 33,
+ 'HIDDEN_S/T': 'T',
+ 'INPUT': '4',
+ 'LEARNING_RATE': 0.14,
+ 'LOWER_LIMIT': '0.4',
+ 'MOMENTUM': 0.0,
+ 'OUTPUT': '2',
+ 'OUTPUT_S/L': 'S',
+ 'SPLIT_DATA': '0.1',
+ 'UPPER_LIMIT': '0.6',
+ 'WEIGHT_DECAY': 0.0}
+
+[{'bad_percentage': 18.91891891891892,
+  'correct_percentage': 81.08108108108108,
+  'epoch': '45',
+  'leanringrate': 0.14,
+  'unknown_percentage': 0.0},
+ {'bad_percentage': 16.216216216216218,
+  'correct_percentage': 82.43243243243244,
+  'epoch': '45',
+  'leanringrate': 0.14,
+  'unknown_percentage': 1.3513513513513513},
+ {'bad_percentage': 18.91891891891892,
+  'correct_percentage': 58.108108108108105,
+  'epoch': '45',
+  'leanringrate': 0.14,
+  'unknown_percentage': 22.972972972972972},
+ {'bad_percentage': 18.91891891891892,
+  'correct_percentage': 75.67567567567568,
+  'epoch': '45',
+  'leanringrate': 0.14,
+  'unknown_percentage': 5.405405405405405},
+ {'bad_percentage': 24.324324324324323,
+  'correct_percentage': 75.67567567567568,
+  'epoch': '45',
+  'leanringrate': 0.14,
+  'unknown_percentage': 0.0},
+ {'bad_percentage': 24.324324324324323,
+  'correct_percentage': 75.67567567567568,
+  'epoch': '45',
+  'leanringrate': 0.14,
+  'unknown_percentage': 0.0},
+ {'bad_percentage': 10.81081081081081,
+  'correct_percentage': 50.0,
+  'epoch': '45',
+  'leanringrate': 0.14,
+  'unknown_percentage': 39.189189189189186},
+ {'bad_percentage': 10.81081081081081,
+  'correct_percentage': 62.16216216216216,
+  'epoch': '45',
+  'leanringrate': 0.14,
+  'unknown_percentage': 27.027027027027028},
+ {'bad_percentage': 10.81081081081081,
+  'correct_percentage': 41.891891891891895,
+  'epoch': '45',
+  'leanringrate': 0.14,
+  'unknown_percentage': 47.2972972972973}]
+epoch	learningrate	correct	bad	unknown
+45	0.14	81.08	18.92	0.0
+45	0.14	82.43	16.22	1.35
+45	0.14	58.11	18.92	22.97
+45	0.14	75.68	18.92	5.41
+45	0.14	75.68	24.32	0.0
+45	0.14	75.68	24.32	0.0
+45	0.14	50.0	10.81	39.19
+45	0.14	62.16	10.81	27.03
+45	0.14	41.89	10.81	47.3
+Avg correct 66.966966967

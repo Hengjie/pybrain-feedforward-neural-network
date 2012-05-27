@@ -1,0 +1,71 @@
+{'BIAS': False,
+ 'EPOCHS': '45',
+ 'HIDDEN0': 9,
+ 'HIDDEN1': 19,
+ 'HIDDEN_S/T': 'S',
+ 'INPUT': '4',
+ 'LEARNING_RATE': 0.14,
+ 'LOWER_LIMIT': '0.4',
+ 'MOMENTUM': 0.2,
+ 'OUTPUT': '2',
+ 'OUTPUT_S/L': 'L',
+ 'SPLIT_DATA': '0.1',
+ 'UPPER_LIMIT': '0.6',
+ 'WEIGHT_DECAY': 0.0}
+
+[{'bad_percentage': 27.027027027027028,
+  'correct_percentage': 72.97297297297297,
+  'epoch': '45',
+  'leanringrate': 0.14,
+  'unknown_percentage': 0.0},
+ {'bad_percentage': 24.324324324324323,
+  'correct_percentage': 75.67567567567568,
+  'epoch': '45',
+  'leanringrate': 0.14,
+  'unknown_percentage': 0.0},
+ {'bad_percentage': 24.324324324324323,
+  'correct_percentage': 75.67567567567568,
+  'epoch': '45',
+  'leanringrate': 0.14,
+  'unknown_percentage': 0.0},
+ {'bad_percentage': 21.62162162162162,
+  'correct_percentage': 78.37837837837837,
+  'epoch': '45',
+  'leanringrate': 0.14,
+  'unknown_percentage': 0.0},
+ {'bad_percentage': 21.62162162162162,
+  'correct_percentage': 78.37837837837837,
+  'epoch': '45',
+  'leanringrate': 0.14,
+  'unknown_percentage': 0.0},
+ {'bad_percentage': 21.62162162162162,
+  'correct_percentage': 78.37837837837837,
+  'epoch': '45',
+  'leanringrate': 0.14,
+  'unknown_percentage': 0.0},
+ {'bad_percentage': 22.972972972972972,
+  'correct_percentage': 77.02702702702703,
+  'epoch': '45',
+  'leanringrate': 0.14,
+  'unknown_percentage': 0.0},
+ {'bad_percentage': 18.91891891891892,
+  'correct_percentage': 81.08108108108108,
+  'epoch': '45',
+  'leanringrate': 0.14,
+  'unknown_percentage': 0.0},
+ {'bad_percentage': 20.27027027027027,
+  'correct_percentage': 79.72972972972973,
+  'epoch': '45',
+  'leanringrate': 0.14,
+  'unknown_percentage': 0.0}]
+epoch	learningrate	correct	bad	unknown
+45	0.14	72.97	27.03	0.0
+45	0.14	75.68	24.32	0.0
+45	0.14	75.68	24.32	0.0
+45	0.14	78.38	21.62	0.0
+45	0.14	78.38	21.62	0.0
+45	0.14	78.38	21.62	0.0
+45	0.14	77.03	22.97	0.0
+45	0.14	81.08	18.92	0.0
+45	0.14	79.73	20.27	0.0
+Avg correct 77.4774774775

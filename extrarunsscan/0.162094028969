@@ -1,0 +1,71 @@
+{'BIAS': True,
+ 'EPOCHS': '45',
+ 'HIDDEN0': 18,
+ 'HIDDEN1': 9,
+ 'HIDDEN_S/T': 'T',
+ 'INPUT': '4',
+ 'LEARNING_RATE': 0.16,
+ 'LOWER_LIMIT': '0.4',
+ 'MOMENTUM': 0.0,
+ 'OUTPUT': '2',
+ 'OUTPUT_S/L': 'L',
+ 'SPLIT_DATA': '0.1',
+ 'UPPER_LIMIT': '0.6',
+ 'WEIGHT_DECAY': 0.0}
+
+[{'bad_percentage': 25.675675675675677,
+  'correct_percentage': 51.351351351351354,
+  'epoch': '45',
+  'leanringrate': 0.16,
+  'unknown_percentage': 22.972972972972972},
+ {'bad_percentage': 14.864864864864865,
+  'correct_percentage': 31.08108108108108,
+  'epoch': '45',
+  'leanringrate': 0.16,
+  'unknown_percentage': 54.054054054054056},
+ {'bad_percentage': 31.08108108108108,
+  'correct_percentage': 68.91891891891892,
+  'epoch': '45',
+  'leanringrate': 0.16,
+  'unknown_percentage': 0.0},
+ {'bad_percentage': 13.513513513513514,
+  'correct_percentage': 85.13513513513513,
+  'epoch': '45',
+  'leanringrate': 0.16,
+  'unknown_percentage': 1.3513513513513513},
+ {'bad_percentage': 24.324324324324323,
+  'correct_percentage': 74.32432432432432,
+  'epoch': '45',
+  'leanringrate': 0.16,
+  'unknown_percentage': 1.3513513513513513},
+ {'bad_percentage': 20.27027027027027,
+  'correct_percentage': 77.02702702702703,
+  'epoch': '45',
+  'leanringrate': 0.16,
+  'unknown_percentage': 2.7027027027027026},
+ {'bad_percentage': 24.324324324324323,
+  'correct_percentage': 63.513513513513516,
+  'epoch': '45',
+  'leanringrate': 0.16,
+  'unknown_percentage': 12.162162162162161},
+ {'bad_percentage': 21.62162162162162,
+  'correct_percentage': 13.513513513513514,
+  'epoch': '45',
+  'leanringrate': 0.16,
+  'unknown_percentage': 64.86486486486487},
+ {'bad_percentage': 21.62162162162162,
+  'correct_percentage': 58.108108108108105,
+  'epoch': '45',
+  'leanringrate': 0.16,
+  'unknown_percentage': 20.27027027027027}]
+epoch	learningrate	correct	bad	unknown
+45	0.16	51.35	25.68	22.97
+45	0.16	31.08	14.86	54.05
+45	0.16	68.92	31.08	0.0
+45	0.16	85.14	13.51	1.35
+45	0.16	74.32	24.32	1.35
+45	0.16	77.03	20.27	2.7
+45	0.16	63.51	24.32	12.16
+45	0.16	13.51	21.62	64.86
+45	0.16	58.11	21.62	20.27
+Avg correct 58.1081081081

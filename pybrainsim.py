@@ -50,7 +50,7 @@ class BrainApp():
                   'LEARNING_RATE': '0.05',
                   'MOMENTUM': '0.0',
                   'BIAS': 'True',
-                  'EPOCHS': '25',  #No of training cycles used
+                  'EPOCHS': '45',  #No of training cycles used
                   'WEIGHT_DECAY': '0.0',
                   'SPLIT_DATA': '0.1',
                   'UPPER_LIMIT': '0.6',  #Higher than this, taken as 1.0
@@ -64,9 +64,16 @@ class BrainApp():
 
     def run(self):
       results = []
-      results.append(self.RunSimulator())
-      results.append(self.RunSimulator())
-      results.append(self.RunSimulator())
+      num_results = 0
+      correct_sum = 0
+      for i in range(10):
+        new_result = self.RunSimulator()
+        results.append(new_result)
+        num_results += 1
+        correct_sum += new_result['correct_percentage']
+        avg = (correct_sum / num_results)
+        if avg < 75:
+          break
       pprint(self.parameters, self.file)
       self.file.write("\n")
       pprint(results, self.file)
@@ -77,7 +84,7 @@ class BrainApp():
         correct_percentage += row['correct_percentage']
         self.file.write("{0}\t{1}\t{2}\t{3}\t{4}\n".format(row['epoch'], row['leanringrate'], round(row['correct_percentage'], 2), round(row['bad_percentage'], 2), round(row['unknown_percentage'], 2)))
 
-      self.file.write("Avg correct %s\n" % (correct_percentage / 3))
+      self.file.write("Avg correct %s\n" % (correct_percentage / num_results))
       self.file.close()
 
     #Configure input file (text) into input list and output list
@@ -339,14 +346,14 @@ def build_jobs(list_of_values):
 
 
 
-learning_rates = [0.05, 0.1, 0.15]
-hidden_layer_1_sizes = [0, 2, 9, 18, 30, 100]
-hidden_layer_0_sizes = [2, 9, 18, 100]
+learning_rates = [0.10, 0.12, 0.14, 0.15, 0.16, 0.17]
+hidden_layer_1_sizes = [0, 9, 18, 19, 33]
+hidden_layer_0_sizes = [8, 9, 18, 19, 33]
 bias_values = [True, False]
-hidden_st = ['T', 'S']
+hidden_st = ['S', 'T']
 output_sl = ['S', 'L']
 momentum_values = [0.0, 0.2]
-weight_decay_values = [0.0, 0.3]
+weight_decay_values = [0.0]
 
 
 # learning_rates = [0.05]
