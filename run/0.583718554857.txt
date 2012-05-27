@@ -1,0 +1,23 @@
+{'BIAS': True,
+ 'EPOCHS': 25,
+ 'HIDDEN0': 9,
+ 'HIDDEN1': 9,
+ 'HIDDEN_S/T': 'T',
+ 'INPUT': '4',
+ 'LEARNING_RATE': 0.1,
+ 'LOWER_LIMIT': '0.4',
+ 'MOMENTUM': 0.0,
+ 'OUTPUT': '2',
+ 'OUTPUT_S/L': 'S',
+ 'SPLIT_DATA': '0.1',
+ 'UPPER_LIMIT': '0.6',
+ 'WEIGHT_DECAY': 0.0}
+
+[{'bad_percentage': 13.513513513513514,
+  'correct_percentage': 50.0,
+  'epoch': 25,
+  'leanringrate': 0.1,
+  'unknown_percentage': 36.486486486486484}]
+epoch	learningrate	correct	bad	unknown
+25	0.1	50.0	13.51	36.49
+Avg correct 50.0
